@@ -57,7 +57,7 @@ namespace MediaCompositionSample
         {
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
             picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.VideosLibrary;
-            picker.FileTypeFilter.Add(".mp4");
+            picker.FileTypeFilter.Add(".jpg");
             IReadOnlyList<Windows.Storage.StorageFile> pickedFiles = await picker.PickMultipleFilesAsync();
             if (pickedFiles == null)
             {
@@ -70,7 +70,7 @@ namespace MediaCompositionSample
                 var storageItemAccessList = Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList;
                 storageItemAccessList.Add(file);
 
-                var clip = await MediaClip.CreateFromFileAsync(file);
+                var clip = await MediaClip.CreateFromImageFileAsync(file, TimeSpan.FromSeconds(3));
                 composition.Clips.Add(clip);
             }
             UpdateMediaElementSource();
